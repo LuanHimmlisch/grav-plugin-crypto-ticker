@@ -1,0 +1,36 @@
+name: Crypto Ticker
+slug: crypto-ticker
+type: plugin
+version: 0.1.0
+description: Cryptocurrency live ticker. Information from CoinPaprika
+icon: plug
+author:
+  name: Luan Himmlisch
+  email: luanhimmlisch@himmlisch.com.mx
+homepage: https://github.com/LuanHimmlisch/grav-plugin-crypto-ticker
+demo: http://demo.yoursite.com
+keywords: grav, plugin, etc
+bugs: https://github.com/LuanHimmlisch/grav-plugin-crypto-ticker/issues
+docs: https://github.com/LuanHimmlisch/grav-plugin-crypto-ticker/blob/develop/README.md
+license: MIT
+
+dependencies:
+  - { name: grav, version: '>=1.6.0' }
+
+form:
+  validation: loose
+  fields:
+    enabled:
+      type: toggle
+      label: PLUGIN_ADMIN.PLUGIN_STATUS
+      highlight: 1
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+    text_var:
+      type: text
+      label: PLUGIN_CRYPTO_TICKER.TEXT_VARIABLE
+      help: PLUGIN_CRYPTO_TICKER.TEXT_VARIABLE_HELP

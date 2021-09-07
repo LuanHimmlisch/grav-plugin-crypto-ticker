@@ -4,7 +4,7 @@ The **Crypto Ticker** Plugin is an extension for [Grav CMS](http://github.com/ge
 
 Cryptocurrency Ticker is a simple ticker that uses CoinPaprika API.
 
-![](https://github.com/LuanHimmlisch/grav-plugin-crypto-ticker/tree/master/screenshot.jpg)
+![](https://raw.githubusercontent.com/LuanHimmlisch/grav-plugin-crypto-ticker/main/screenshot.jpg)
 
 ## Installation
 

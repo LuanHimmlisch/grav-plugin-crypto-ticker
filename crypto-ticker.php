@@ -3,6 +3,8 @@ namespace Grav\Plugin;
 
 use Composer\Autoload\ClassLoader;
 use Grav\Common\Plugin;
+use RocketTheme\Toolbox\Event\Event;
+
 
 /**
  * Class CryptoTickerPlugin
@@ -10,6 +12,16 @@ use Grav\Common\Plugin;
  */
 class CryptoTickerPlugin extends Plugin
 {
+    /**
+     * Composer autoload
+     *
+     * @return ClassLoader
+     */
+    public function autoload(): ClassLoader
+    {
+        return require __DIR__ . '/vendor/autoload.php';
+    }
+
     /**
      * @return array
      *
@@ -23,24 +35,36 @@ class CryptoTickerPlugin extends Plugin
     public static function getSubscribedEvents(): array
     {
         return [
-            'onPluginsInitialized' => [
-                // Uncomment following line when plugin requires Grav < 1.7
-                // ['autoload', 100000],
-                ['onPluginsInitialized', 0]
-            ]
+            'onPluginsInitialized' => ['onPluginsInitialized', 0],
+            'onGetPageTemplates' => ['onGetPageTemplates', 0],
+            'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0]
         ];
     }
 
+    
     /**
-     * Composer autoload
+     * Add page template types.
      *
-     * @return ClassLoader
+     * @return void
      */
-    public function autoload(): ClassLoader
+    public function onGetPageTemplates(Event $event)
     {
-        return require __DIR__ . '/vendor/autoload.php';
+        /** @var Types $types */
+        $types = $event->types;
+        $types->scanTemplates('plugins://crypto-ticker/templates');
     }
 
+    /**
+     * Add current directory to twig lookup paths.
+     *
+     * @return void
+     */
+    public function onTwigTemplatePaths()
+    {
+        $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
+    }
+
+    
     /**
      * Initialize the plugin
      */
@@ -53,7 +77,45 @@ class CryptoTickerPlugin extends Plugin
 
         // Enable the main events we are interested in
         $this->enable([
-            // Put your main events here
+            'onPagesInitialized' => ['onPagesInitialized', 0],
+            'onTwigSiteVariables' => ['onTwigSiteVariables', 0]
         ]);
+    }
+    
+    public function onPagesInitialized() { }
+    
+    public function onTwigSiteVariables() {
+        
+        if ($this->config->get('plugins.crypto-ticker.built_in_css')) {
+            $this->grav['assets']->add('plugin://crypto-ticker/css/crypto-ticker.css');
+        }
+
+        $coins = $this->paprika();
+        
+        // Adding variables to the templates
+        $this->grav['twig']->twig_vars['seo_title'] = $this->config->get('plugins.crypto-ticker.seo_title');
+        $this->grav['twig']->twig_vars['coins'] = $coins;
+    }
+
+    private function paprika(){
+        $this->autoload();
+        $client = new \Coinpaprika\Client();
+
+        $coinIds = $this->config->get('plugins.crypto-ticker.coins');
+        
+        $coins = array_map( function ($coinId) use ($client) {
+            $coin = $client->getTickerByCoinId($coinId);
+
+            return [
+                "name" => $coin->getName(),
+                "symbol" => $coin->getSymbol(),
+                "usd" => number_format($coin->getPriceUSD(), 2),
+                // "btc" => $coin->getPriceBTC(),
+                "change" => $coin->getPercentChange24h()
+            ];
+        }, $coinIds);
+
+        return $coins;
+        
     }
 }

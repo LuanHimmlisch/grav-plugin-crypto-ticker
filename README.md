@@ -1,8 +1,10 @@
 # Crypto Ticker Plugin
 
-**This README.md file should be modified to describe the features, installation, configuration, and general usage of the plugin.**
+The **Crypto Ticker** Plugin is an extension for [Grav CMS](http://github.com/getgrav/grav). 
 
-The **Crypto Ticker** Plugin is an extension for [Grav CMS](http://github.com/getgrav/grav). Cryptocurrency live ticker. Information from CoinPaprika
+Cryptocurrency Ticker is a simple ticker that uses CoinPaprika API.
+
+![](https://github.com/LuanHimmlisch/grav-plugin-crypto-ticker/tree/master/screenshot.jpg)
 
 ## Installation
 
@@ -44,13 +46,8 @@ Note that if you use the Admin Plugin, a file with your configuration named cryp
 
 ## Usage
 
-**Describe how to use the plugin.**
+Insert `{% include 'partials/crypto-ticker.html.twig' %}` on to the template file where you want to add the ticker.
 
 ## Credits
 
-**Did you incorporate third-party code? Want to thank somebody?**
-
-## To Do
-
-- [ ] Future plans, if any
-
+This plugin uses the [oficial CoinPaprika API wrapper](https://github.com/coinpaprika/coinpaprika-api-php-client).

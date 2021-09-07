@@ -1,2 +1,5 @@
 enabled: true
-text_var: Custom Text added by the **Crypto Ticker** plugin (disable plugin to remove)
+active: true
+built_in_css: true
+seo_title: 'Best privacy cryptocurrencies'
+coins: ['arrr-pirate', 'xmr-monero', 'dero-dero', 'xhv-haven-protocol', 'wow-wownero', 'zano-zano', 'xeq-equilibria', 'ccx-conceal', 'prcy-privacy-coin']

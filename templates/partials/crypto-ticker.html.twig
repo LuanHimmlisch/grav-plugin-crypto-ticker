@@ -1,0 +1,13 @@
+<div class="crypto-ticker-wrapper">
+    <h2 class="crypto-ticker-title">{{ seo_title }}</h2>
+    <div class="crypto-ticker">
+        {% for coin in coins %}
+            <div class="crypto-ticker-item">
+                <h3 class="crypto-ticker-name">{{ coin['name'] }}</h3>
+                <p class="crypto-ticker-symbol">{{ coin['symbol'] }}</p>
+                <p class="crypto-ticker-usd">${{ coin['usd'] }}</p>
+                <p class="crypto-ticker-change {% if coin['change'] > 0 %} crypto-ticker-change--green {% elseif coin['change'] < 0 %} crypto-ticker-change--red {% endif %}">{{ coin['change'] }}%</p>
+            </div>
+        {% endfor %}        
+    </div>
+</div>

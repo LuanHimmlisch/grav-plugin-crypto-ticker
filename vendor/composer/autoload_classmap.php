@@ -8,4 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Grav\\Plugin\\CryptoTickerPlugin' => $baseDir . '/crypto-ticker.php',
+    'Normalizer' => $vendorDir . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
 );

@@ -36,8 +36,7 @@ class CryptoTickerPlugin extends Plugin
     {
         return [
             'onPluginsInitialized' => ['onPluginsInitialized', 0],
-            'onGetPageTemplates' => ['onGetPageTemplates', 0],
-            'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0]
+            // 'onGetPageTemplates' => ['onGetPageTemplates', 0],
         ];
     }
 
@@ -47,12 +46,12 @@ class CryptoTickerPlugin extends Plugin
      *
      * @return void
      */
-    public function onGetPageTemplates(Event $event)
-    {
-        /** @var Types $types */
-        $types = $event->types;
-        $types->scanTemplates('plugins://crypto-ticker/templates');
-    }
+    // public function onGetPageTemplates(Event $event)
+    // {
+    //     /** @var Types $types */
+    //     $types = $event->types;
+    //     $types->scanTemplates('plugins://crypto-ticker/templates');
+    // }
 
     /**
      * Add current directory to twig lookup paths.
@@ -78,7 +77,8 @@ class CryptoTickerPlugin extends Plugin
         // Enable the main events we are interested in
         $this->enable([
             'onPagesInitialized' => ['onPagesInitialized', 0],
-            'onTwigSiteVariables' => ['onTwigSiteVariables', 0]
+            'onTwigSiteVariables' => ['onTwigSiteVariables', 0],
+            'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0]
         ]);
     }
     
@@ -98,7 +98,6 @@ class CryptoTickerPlugin extends Plugin
     }
 
     private function paprika(){
-        $this->autoload();
         $client = new \Coinpaprika\Client();
 
         $coinIds = $this->config->get('plugins.crypto-ticker.coins');

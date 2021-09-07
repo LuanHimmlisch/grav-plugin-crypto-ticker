@@ -28,7 +28,7 @@
 .crypto-ticker-wrapper .crypto-ticker-item {
     display: inline-block;
     padding: 0 2rem;
-    color: #fff;
+    color: #ccc;
     min-width: 15vw;
 }
 .crypto-ticker-wrapper .crypto-ticker-item p{
@@ -41,9 +41,11 @@
 .crypto-ticker-wrapper .crypto-ticker-item .crypto-ticker-symbol{
     display: inline-block;
     font-size: 2rem;
+    color: #fff;
+    font-weight: bolder;
 }
-.crypto-ticker-wrapper .crypto-ticker-item .crypto-ticker-change{
-    color: #ccc;
+.crypto-ticker-wrapper .crypto-ticker-item .crypto-ticker-usd{
+    font-weight: thin;
 }
 .crypto-ticker-change--green{
     color: #8adb65 !important;
